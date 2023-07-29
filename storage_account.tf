@@ -1,11 +1,11 @@
 locals {
-  resource_type_abbreviation_local = "SA"
-  location_local                   = "West US 3"
+  resource_type_abbreviation_local_storage = "SA"  # Renamed local variable for storage_account.tf
+  location_local_storage                   = "West US 3"  # Renamed local variable for storage_account.tf
 }
 
 resource "azurerm_storage_account" "storage_account" {
-  name                     = "${var.department_abbreviation}${var.major_environment}${var.project}${var.specific_environment}${local.resource_type_abbreviation_local}"
-  location                 = local.location_local
+  name                     = "${var.department_abbreviation}${var.major_environment}${var.project}${var.specific_environment}${local.resource_type_abbreviation_local_storage}"
+  location                 = local.location_local_storage
   resource_group_name      = azurerm_resource_group.CORP-LE-NafNet-RG.name
   account_tier             = "Standard"
   account_replication_type = "LRS"

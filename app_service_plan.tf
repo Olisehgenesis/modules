@@ -24,3 +24,4 @@ resource "azurerm_app_service_plan" "app_service_plan" {
   is_xenon = local.operating_system_local == "Linux"
   hyper_v  = local.operating_system_local == "Linux"
 }
+

@@ -1,12 +1,11 @@
 locals {
-  operating_system = "Windows"  # Replace "Windows" with the appropriate operating system value
+  operating_system_local_app_service = "Windows"  # Replace "Windows" with the appropriate operating system value
 }
 
 module "app_service" {
   #source = "https://dev.azure.com/NAFTechnologyServices/Cloud%20Architecture%20Templates/_git/modules?path=/app_service.tf"
   # source = "github.com/Olisehgenesis/modules"
-  # Pass the local operating_system variable to the app_service module
-  operating_system = local.operating_system
+  operating_system = local.operating_system_local_app_service
 
   site_config {
     always_on                 = true
@@ -20,7 +19,7 @@ module "app_service" {
   }
 
   # Choose the Operating System based on the local variable value
-  os_type = local.operating_system
+  os_type = local.operating_system_local_app_service
 
   # Enable Application Insights
   app_settings = {

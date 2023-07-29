@@ -1,11 +1,11 @@
 locals {
-  resource_type_abbreviation_local = "ai"
-  location_local                   = "West US 3"
+  resource_type_abbreviation_local_app_insights = "AI"
+  location_local_app_insights                   = "West US 3"
 }
 
 resource "azurerm_application_insights" "app_insights" {
-  name                = "${var.department_abbreviation}-${var.major_environment}-${var.project}-${var.specific_environment}-${local.resource_type_abbreviation_local}-APPIN"
-  location            = local.location_local
+  name                = "${var.department_abbreviation}-${var.major_environment}-${var.project}-${var.specific_environment}-${local.resource_type_abbreviation_local_app_insights}-APPIN"
+  location            = local.location_local_app_insights
   resource_group_name = azurerm_resource_group.CORP-LE-NafNet-RG.name
 
   tags = {

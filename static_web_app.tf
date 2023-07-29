@@ -1,6 +1,6 @@
 locals {
-  resource_type_abbreviation_local = "SWA"
-  location_local                   = "West US 2"
+  resource_type_abbreviation_local_static_web_app = "SWA"
+  location_local_static_web_app                   = "West US 2"
 }
 
 variable "private_endpoint_enabled" {
@@ -14,8 +14,8 @@ variable "private_endpoint_subnet_id" {
 }
 
 resource "azurerm_static_site" "static_web_app" {
-  name                = "${var.department_abbreviation}-${var.major_environment}-${var.project}-${var.specific_environment}-${local.resource_type_abbreviation_local}-SWA"
-  location            = local.location_local
+  name                = "${var.department_abbreviation}-${var.major_environment}-${var.project}-${var.specific_environment}-${local.resource_type_abbreviation_local_static_web_app}-SWA"
+  location            = local.location_local_static_web_app
   resource_group_name = azurerm_resource_group.CORP-LE-NafNet-RG.name
 
   sku {
@@ -52,14 +52,14 @@ resource "azurerm_private_dns_zone" "private_dns_zone" {
 }
 
 resource "azurerm_private_dns_zone_virtual_network_link" "private_dns_vnet_link" {
-  name                = "${var.department_abbreviation}-${var.major_environment}-${var.project}-${var.specific_environment}-${local.resource_type_abbreviation_local}-VNETLink"
+  name                = "${var.department_abbreviation}-${var.major_environment}-${var.project}-${var.specific_environment}-${local.resource_type_abbreviation_local_static_web_app}-VNETLink"
   resource_group_name = azurerm_resource_group.CORP-LE-NafNet-RG.name
   private_dns_zone_id = azurerm_private_dns_zone.private_dns_zone.id
   virtual_network_id  = var.private_endpoint_subnet_id
 }
 
 resource "azurerm_private_dns_zone_virtual_network_link" "private_dns_vnet_link_www" {
-  name                = "${var.department_abbreviation}-${var.major_environment}-${var.project}-${var.specific_environment}-${local.resource_type_abbreviation_local}-VNETLink-WWW"
+  name                = "${var.department_abbreviation}-${var.major_environment}-${var.project}-${var.specific_environment}-${local.resource_type_abbreviation_local_static_web_app}-VNETLink-WWW"
   resource_group_name = azurerm_resource_group.CORP-LE-NafNet-RG.name
   private_dns_zone_id = azurerm_private_dns_zone.private_dns_zone.id
   virtual_network_id  = var.private_endpoint_subnet_id
@@ -81,8 +81,8 @@ resource "azurerm_static_site_custom_https" "static_web_app_https" {
 resource "azurerm_private_endpoint" "private_endpoint" {
   count = var.private_endpoint_enabled ? 1 : 0
 
-  name                 = "${var.department_abbreviation}-${var.major_environment}-${var.project}-${var.specific_environment}-${local.resource_type_abbreviation_local}-SWA-PE"
-  location             = local.location_local
+  name                 = "${var.department_abbreviation}-${var.major_environment}-${var.project}-${var.specific_environment}-${local.resource_type_abbreviation_local_static_web_app}-SWA-PE"
+  location             = local.location_local_static_web_app
   resource_group_name  = azurerm_resource_group.CORP-LE-NafNet-RG.name
   subnet_id            = var.private_endpoint_subnet_id
 
