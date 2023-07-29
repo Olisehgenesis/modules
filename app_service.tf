@@ -4,8 +4,9 @@ locals {
 
 module "app_service" {
   #source = "https://dev.azure.com/NAFTechnologyServices/Cloud%20Architecture%20Templates/_git/modules?path=/app_service.tf"
-  source = "github.com/Olisehgenesis/modules"
+  # source = "github.com/Olisehgenesis/modules"
   # Pass the local operating_system variable to the app_service module
+  s
   operating_system = local.operating_system
 
   site_config {
