@@ -11,13 +11,14 @@ variable "major_environment" {
 }
 
 variable "project" {
-  type        = nafperf
+  type        =  string
+  default = "nafperf"
   description = "Project name."
 }
 
 variable "specific_environment" {
   type        = string
-  default = web
+  default = "web"
   description = "Specific environment or subproject."
 }
 

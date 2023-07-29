@@ -1,21 +1,11 @@
-
-
-variable "resource_type_abbreviation" {
-  type = string
-  default = LA
-
+locals {
+  resource_type_abbreviation_local = "LA"
+  location_local                   = "West US 3"
 }
-
-variable "location" {
-  type        = string
-  default     = "West US 3"
-  description = "Azure region where resources will be deployed."
-}
-
 
 resource "azurerm_log_analytics_workspace" "log_analytics" {
-  name                = "${var.department_abbreviation}-${var.major_environment}-${var.project}-${var.specific_environment}-${var.resource_type_abbreviation}-LAW"
-  location            = var.location
+  name                = "${var.department_abbreviation}-${var.major_environment}-${var.project}-${var.specific_environment}-${local.resource_type_abbreviation_local}-LAW"
+  location            = local.location_local
   resource_group_name = azurerm_resource_group.CORP-LE-NafNet-RG.name
   sku                 = "PerGB2018"
   retention_in_days   = 30

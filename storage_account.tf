@@ -1,20 +1,11 @@
-
-
-variable "resource_type_abbreviation" {
-  type = string
-  default = "SA"
+locals {
+  resource_type_abbreviation_local = "SA"
+  location_local                   = "West US 3"
 }
-
-variable "location" {
-  type        = string
-  default     = "West US 3"
-  description = "Azure region where resources will be deployed."
-}
-
 
 resource "azurerm_storage_account" "storage_account" {
-  name                     = "${var.department_abbreviation}${var.major_environment}${var.project}${var.specific_environment}${var.resource_type_abbreviation}"
-  location                 = var.location
+  name                     = "${var.department_abbreviation}${var.major_environment}${var.project}${var.specific_environment}${local.resource_type_abbreviation_local}"
+  location                 = local.location_local
   resource_group_name      = azurerm_resource_group.CORP-LE-NafNet-RG.name
   account_tier             = "Standard"
   account_replication_type = "LRS"

@@ -1,34 +1,17 @@
-
-
-
-variable "resource_type_abbreviation" {
-  type = string
-  default = ASP
-}
-
-variable "location" {
-  type        = string
-  default     = "West US 3"
-  description = "Azure region where resources will be deployed."
-}
-
-variable "pricing_tier" {
-  type    = string
-  default = "S1"
-}
-
-variable "operating_system" {
-  type    = string
-  default = "Windows"
+locals {
+  resource_type_abbreviation_local = "ASP"
+  location_local                   = "West US 3"
+  pricing_tier_local               = "S1"
+  operating_system_local            = "Windows"
 }
 
 resource "azurerm_app_service_plan" "app_service_plan" {
-  name                = "${var.department_abbreviation}-${var.major_environment}-${var.project}-${var.specific_environment}-${var.resource_type_abbreviation}-ASP"
-  location            = var.location
+  name                = "${var.department_abbreviation}-${var.major_environment}-${var.project}-${var.specific_environment}-${local.resource_type_abbreviation_local}-ASP"
+  location            = local.location_local
   resource_group_name = azurerm_resource_group.CORP-LE-NafNet-RG.name
 
   sku {
-    tier = var.pricing_tier
+    tier = local.pricing_tier_local
     size = "S1"
   }
 
@@ -37,7 +20,7 @@ resource "azurerm_app_service_plan" "app_service_plan" {
     Department = var.tag_department
   }
 
-  reserved = var.operating_system == "Linux"
-  is_xenon = var.operating_system == "Linux"
-  hyper_v  = var.operating_system == "Linux"
+  reserved = local.operating_system_local == "Linux"
+  is_xenon = local.operating_system_local == "Linux"
+  hyper_v  = local.operating_system_local == "Linux"
 }

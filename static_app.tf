@@ -1,11 +1,11 @@
 locals {
-  resource_type_abbreviation = "SA"
-  location                   = "West US 2"
+  resource_type_abbreviation_local = "SA"
+  location_local                   = "West US 2"
 }
 
 resource "azurerm_app_service" "static_app" {
-  name                = "${var.department_abbreviation}-${var.major_environment}-${var.project}-${var.specific_environment}-${local.resource_type_abbreviation}-AS"
-  location            = local.location
+  name                = "${var.department_abbreviation}-${var.major_environment}-${var.project}-${var.specific_environment}-${local.resource_type_abbreviation_local}-AS"
+  location            = local.location_local
   resource_group_name = azurerm_resource_group.CORP-LE-NafNet-RG.name
 
   site_config {
